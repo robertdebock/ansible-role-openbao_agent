@@ -1,0 +1,25 @@
+---
+
+argument_specs:
+  main:
+    short_description: "Install and configure openbao_agent on your system."
+    description: >
+      Install and configure openbao_agent on your system.
+    author: Robert de Bock
+    options:
+      openbao_agent_config:
+        type: "str"
+        default: ""
+        description: "Default configuration for openbao_agent. HCL configuration content."
+      openbao_agent_environment:
+        type: "dict"
+        default: {}
+        description: "Environment variables to set for openbao_agent. Dictionary of key-value pairs."
+      openbao_agent_config_path:
+        type: "str"
+        default: "/etc/openbao/agent.hcl"
+        description: "Where to store the agent config file."
+      openbao_agent_environment_path:
+        type: "str"
+        default: "/etc/openbao/agent.env"
+        description: "Where to store the agent environment file."

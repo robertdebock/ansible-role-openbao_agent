@@ -1,0 +1,51 @@
+---
+# tasks file for openbao_agent
+
+- name: Import assert.yml
+  ansible.builtin.import_tasks:
+    file: assert.yml
+  run_once: true
+  delegate_to: localhost
+
+- name: Configure OpenBao agent
+  ansible.builtin.template:
+    src: openbao-agent.hcl.j2
+    dest: "{{ openbao_agent_config_path }}"
+    owner: openbao
+    group: openbao
+    mode: "0600"
+  when:
+    - openbao_agent_config is defined
+    - openbao_agent_config | length > 0
+  notify:
+    - Restart OpenBao Agent
+
+- name: Configure OpenBao agent environment file
+  ansible.builtin.template:
+    src: openbao-agent.env.j2
+    dest: "{{ openbao_agent_environment_path }}"
+    owner: openbao
+    group: openbao
+    mode: "0600"
+  when:
+    - openbao_agent_environment is defined
+    - openbao_agent_environment | length > 0
+  notify:
+    - Restart OpenBao Agent
+
+- name: Configure OpenBao agent systemd unit
+  ansible.builtin.template:
+    src: openbao-agent.service.j2
+    dest: /etc/systemd/system/openbao-agent.service
+    owner: root
+    group: root
+    mode: "0644"
+  notify:
+    - Restart OpenBao Agent
+
+- name: Manage OpenBao agent service
+  ansible.builtin.systemd:
+    name: openbao-agent
+    state: started
+    enabled: true
+    daemon_reload: true

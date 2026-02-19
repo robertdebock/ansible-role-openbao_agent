@@ -1,0 +1,8 @@
+---
+#
+# Ansible managed
+#
+repository:
+  description: Configure OpenBao Agent on your system.
+  homepage: https://robertdebock.nl/
+  topics: openbaoagent, application, cloud, database, development, infrastructure, linux, monitoring, networking, storage, security, system, tools, windows, ansible, molecule, playbook

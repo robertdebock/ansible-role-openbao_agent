@@ -1,0 +1,19 @@
+---
+- name: Verify
+  hosts: all
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Verify OpenBao agent service status
+      ansible.builtin.systemd:
+        name: openbao-agent
+      register: service_status
+
+    - name: Assert OpenBao agent service is running and enabled
+      ansible.builtin.assert:
+        that:
+          - service_status.status.ActiveState == "active"
+          - service_status.status.SubState == "running"
+          - service_status.status.UnitFileState == "enabled"
+        quiet: true

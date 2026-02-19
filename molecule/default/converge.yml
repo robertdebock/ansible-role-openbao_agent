@@ -1,0 +1,28 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+  gather_facts: true
+
+  roles:
+    - role: robertdebock.openbao_agent
+      openbao_agent_config: |
+        vault {
+          address = "http://127.0.0.1:8200"
+        }
+        auto_auth {
+          method "approle" {
+            config {
+              role_id_file_path = "/opt/openbao/approle-role-id"
+              secret_id_file_path = "/opt/openbao/approle-secret-id"
+            }
+          }
+          sink "file" {
+            config {
+              path = "/opt/openbao/agent-token"
+            }
+          }
+        }
+      openbao_agent_environment:
+        BAO_ADDR: "http://127.0.0.1:8200"
+

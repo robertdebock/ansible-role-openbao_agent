@@ -1,0 +1,23 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=OpenBao Agent
+Documentation=https://openbao.org/docs/agent
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=openbao
+Group=openbao
+ExecStart=/usr/bin/bao agent -config={{ openbao_agent_config_path }}
+{% if openbao_agent_environment is defined and openbao_agent_environment | length > 0 %}
+EnvironmentFile={{ openbao_agent_environment_path }}
+{% endif %}
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

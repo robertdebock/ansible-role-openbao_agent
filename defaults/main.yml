@@ -1,0 +1,46 @@
+---
+# defaults file for openbao_agent
+
+# Where to store the agent config file.
+openbao_agent_config_path: /etc/openbao/agent.hcl
+# Where to store the agent environment file.
+openbao_agent_environment_path: /etc/openbao/agent.env
+
+# Default configuration for openbao_agent
+# openbao_agent_config: |
+#   auto_auth {
+#     method {
+#       type = "token_file"
+#       config {
+#         token_file_path = "/Users/avean/.vault-token"
+#       }
+#     }
+#   }
+
+#   template_config {
+#     static_secret_render_interval = "5m"
+#     exit_on_retry_failure         = true
+#   }
+
+#   vault {
+#     address = "http://localhost:8200"
+#   }
+
+#   env_template "FOO_PASSWORD" {
+#     contents             = "{{ with secret \"secret/data/foo\" }}{{ .Data.data.password }}{{ end }}"
+#     error_on_missing_key = true
+#   }
+
+#   env_template "FOO_USER" {
+#     contents             = "{{ with secret \"secret/data/foo\" }}{{ .Data.data.user }}{{ end }}"
+#     error_on_missing_key = true
+#   }
+
+#   exec {
+#     command                   = ["./my-app", "arg1", "arg2"]
+#     restart_on_secret_changes = "always"
+#     restart_stop_signal       = "SIGTERM"
+#   }
+
+# openbao_agent_environment:
+#   SOME_VARIABLE: "some value"

@@ -1,0 +1,34 @@
+---
+# Assert variables from defaults/main.yml
+
+- name: Assert openbao_agent_config is a string
+  ansible.builtin.assert:
+    that:
+      - openbao_agent_config is defined
+      - openbao_agent_config is string
+    fail_msg: "openbao_agent_config must be a string"
+    quiet: true
+
+- name: Assert openbao_agent_environment is a dictionary
+  ansible.builtin.assert:
+    that:
+      - openbao_agent_environment is defined
+      - openbao_agent_environment is mapping
+    fail_msg: "openbao_agent_environment must be a dictionary"
+    quiet: true
+
+- name: Assert openbao_agent_config_path is a string
+  ansible.builtin.assert:
+    that:
+      - openbao_agent_config_path is defined
+      - openbao_agent_config_path is string
+    fail_msg: "openbao_agent_config_path must be a string"
+    quiet: true
+
+- name: Assert openbao_agent_environment_path is a string
+  ansible.builtin.assert:
+    that:
+      - openbao_agent_environment_path is defined
+      - openbao_agent_environment_path is string
+    fail_msg: "openbao_agent_environment_path must be a string"
+    quiet: true
