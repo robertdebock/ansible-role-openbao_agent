@@ -10,7 +10,7 @@ Wants=network-online.target
 Type=simple
 User=openbao
 Group=openbao
-ExecStart=/usr/bin/bao agent -config={{ openbao_agent_config_path }}
+ExecStart=/usr/bin/bao agent -config={{ openbao_agent_config_file }}
 {% if openbao_agent_environment is defined and openbao_agent_environment | length > 0 %}
 EnvironmentFile={{ openbao_agent_environment_path }}
 {% endif %}

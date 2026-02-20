@@ -38,7 +38,6 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
         }
       openbao_agent_environment:
         BAO_ADDR: "http://127.0.0.1:8200"
-
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/robertdebock/ansible-role-openbao_agent/blob/master/molecule/default/prepare.yml):
@@ -66,11 +65,13 @@ The default values for the variables are set in [`defaults/main.yml`](https://gi
 # defaults file for openbao_agent
 
 # Where to store the agent config file.
-openbao_agent_config_path: /etc/openbao/agent.hcl
+openbao_agent_config_file: /etc/openbao/agent.hcl
+
 # Where to store the agent environment file.
 openbao_agent_environment_path: /etc/openbao/agent.env
 
 # Default configuration for openbao_agent
+openbao_agent_config: ""
 # openbao_agent_config: |
 #   auto_auth {
 #     method {
@@ -106,6 +107,8 @@ openbao_agent_environment_path: /etc/openbao/agent.env
 #     restart_stop_signal       = "SIGTERM"
 #   }
 
+# Environment variables to set for openbao_agent. Dictionary of key-value pairs.
+openbao_agent_environment: {}
 # openbao_agent_environment:
 #   SOME_VARIABLE: "some value"
 ```
@@ -136,12 +139,11 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 
 |container|tags|
 |---------|----|
-|[Alpine](https://hub.docker.com/r/robertdebock/alpine)|all|
 |[Amazon](https://hub.docker.com/r/robertdebock/amazonlinux)|Candidate|
-|[Debian](https://hub.docker.com/r/robertdebock/debian)|all|
-|[EL](https://hub.docker.com/r/robertdebock/enterpriselinux)|all|
-|[Fedora](https://hub.docker.com/r/robertdebock/fedora)|all|
-|[Ubuntu](https://hub.docker.com/r/robertdebock/ubuntu)|all|
+|[Debian](https://hub.docker.com/r/robertdebock/debian)|bullseye, bookworm, trixie|
+|[EL](https://hub.docker.com/r/robertdebock/enterpriselinux)|9|
+|[Fedora](https://hub.docker.com/r/robertdebock/fedora)|42, 40|
+|[Ubuntu](https://hub.docker.com/r/robertdebock/ubuntu)|jammy, noble|
 
 The minimum version of Ansible required is 2.12, tests have been done on:
 

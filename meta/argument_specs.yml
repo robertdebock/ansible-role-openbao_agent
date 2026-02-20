@@ -15,7 +15,7 @@ argument_specs:
         type: "dict"
         default: {}
         description: "Environment variables to set for openbao_agent. Dictionary of key-value pairs."
-      openbao_agent_config_path:
+      openbao_agent_config_file:
         type: "str"
         default: "/etc/openbao/agent.hcl"
         description: "Where to store the agent config file."

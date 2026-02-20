@@ -2,11 +2,13 @@
 # defaults file for openbao_agent
 
 # Where to store the agent config file.
-openbao_agent_config_path: /etc/openbao/agent.hcl
+openbao_agent_config_file: /etc/openbao/agent.hcl
+
 # Where to store the agent environment file.
 openbao_agent_environment_path: /etc/openbao/agent.env
 
 # Default configuration for openbao_agent
+openbao_agent_config: ""
 # openbao_agent_config: |
 #   auto_auth {
 #     method {
@@ -42,5 +44,7 @@ openbao_agent_environment_path: /etc/openbao/agent.env
 #     restart_stop_signal       = "SIGTERM"
 #   }
 
+# Environment variables to set for openbao_agent. Dictionary of key-value pairs.
+openbao_agent_environment: {}
 # openbao_agent_environment:
 #   SOME_VARIABLE: "some value"

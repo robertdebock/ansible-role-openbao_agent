@@ -7,10 +7,18 @@
   run_once: true
   delegate_to: localhost
 
+- name: Ensure OpenBao agent configuration directory exists
+  ansible.builtin.file:
+    path: "{{ openbao_agent_config_file | dirname }}"
+    state: directory
+    owner: openbao
+    group: openbao
+    mode: "0755"
+
 - name: Configure OpenBao agent
   ansible.builtin.template:
     src: openbao-agent.hcl.j2
-    dest: "{{ openbao_agent_config_path }}"
+    dest: "{{ openbao_agent_config_file }}"
     owner: openbao
     group: openbao
     mode: "0600"
