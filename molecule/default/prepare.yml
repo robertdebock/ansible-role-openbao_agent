@@ -7,3 +7,13 @@
   roles:
     - role: robertdebock.bootstrap
     - role: robertdebock.openbao
+
+  tasks:
+    # The Debian package creates /opt/openbao, the rpm package does not.
+    - name: Create the OpenBao directory
+      ansible.builtin.file:
+        path: /opt/openbao
+        state: directory
+        owner: openbao
+        group: openbao
+        mode: "0750"
