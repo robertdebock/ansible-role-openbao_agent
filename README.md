@@ -52,6 +52,16 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
   roles:
     - role: robertdebock.bootstrap
     - role: robertdebock.openbao
+
+  tasks:
+    # The Debian package creates /opt/openbao, the rpm package does not.
+    - name: Create the OpenBao directory
+      ansible.builtin.file:
+        path: /opt/openbao
+        state: directory
+        owner: openbao
+        group: openbao
+        mode: "0750"
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
@@ -144,11 +154,7 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 |[Fedora](https://hub.docker.com/r/robertdebock/fedora)|all|
 |[Ubuntu](https://hub.docker.com/r/robertdebock/ubuntu)|jammy, noble|
 
-The minimum version of Ansible required is 2.12, tests have been done on:
-
-- The previous version.
-- The current version.
-- The development version.
+The minimum version of Ansible (ansible-core) required is 2.20, tests are done with the latest release of ansible-core.
 
 If you find issues, please register them on [GitHub](https://github.com/robertdebock/ansible-role-openbao_agent/issues).
 
